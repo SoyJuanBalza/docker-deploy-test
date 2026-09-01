@@ -83,7 +83,7 @@
       <img class="logo-mark" src="assets/logo/juanbalza-wordmark.png" alt="Juan Balza">
     </a>
     <nav class="site-nav">
-      <div class="site-nav-links">
+      <div class="site-nav-links" id="site-nav-links">
         <a href="#metodo">Método CONEX</a>
         <a href="#contenido">Contenido</a>
         <a href="#sobre-mi">Sobre mí</a>
@@ -91,6 +91,13 @@
       </div>
     </nav>
     <a class="btn btn-dark" href="https://chat.whatsapp.com/EL19bVO98Rh6SmiEY89na9?mode=gi_t" target="_blank" rel="noopener noreferrer">Unirme gratis</a>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav-links">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
   </div>
 </header>
 
@@ -397,6 +404,22 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  var navToggle = document.getElementById('nav-toggle');
+  var navLinks = document.getElementById('site-nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 
   // Tabs
   var tabs = document.querySelectorAll('.tab-btn');
